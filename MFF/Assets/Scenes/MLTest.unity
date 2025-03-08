@@ -412,6 +412,7 @@ MonoBehaviour:
   agentParent: {fileID: 1532212430}
   agentPrefab: {fileID: 3018732379159808589, guid: fbaa4de46f6792f4b9bb95e71ce77dd4, type: 3}
   pathPrefab: {fileID: -6203448079302036260, guid: 8f4df865a44e5b94eae76985466f90fa, type: 3}
+  pathAlgorithm: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

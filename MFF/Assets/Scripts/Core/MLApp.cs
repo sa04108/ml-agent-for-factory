@@ -8,10 +8,14 @@ namespace MlAgent
     {
         private static Dictionary<Type, Service> services = new();
 
+        [Header("Agent")]
         [SerializeField] private int agentNumber = 4;
         [SerializeField] private Transform agentParent;
         [SerializeField] private Agent agentPrefab;
+
+        [Header("Path")]
         [SerializeField] private PathManager pathPrefab;
+        [SerializeField] private PathAlgorithm pathAlgorithm;
         private int agentIndex = 0;
 
         private void Start()
@@ -45,6 +49,7 @@ namespace MlAgent
         private void CreatePath()
         {
             var pm = Instantiate(pathPrefab, transform);
+            pm.SetPathAlgorithm(pathAlgorithm);
             pm.OnInit();
             services.Add(typeof(PathManager), pm);
         }
@@ -52,6 +57,7 @@ namespace MlAgent
         private void CreateAgent(Vector3 position)
         {
             var ag = Instantiate(agentPrefab, agentParent);
+            ag.transform.position = position;
             ag.name = $"Agent {++agentIndex}";
 
             ag.OnCreate();

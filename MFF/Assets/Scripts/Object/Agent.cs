@@ -1,59 +1,57 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace MlAgent
 {
     public class Agent : MonoBehaviour
     {
-        //// 위치 체크 시 허용 오차
-        //[SerializeField] private float checkTolerance = 0.1f;
-        // 이동 속도 (초당 단위 거리)
+        [Tooltip("Agent가 이동할 속도 (초당 단위 거리)")]
         public float speed = 5f;
-        // 목적지 도달 판단 임계값
+        [Tooltip("목표 rally point에 도착했다고 판단하는 임계값")]
         public float arrivalThreshold = 0.1f;
-        // 현재 이동 목적지
-        private Vector3 currentDestination;
 
         private PathManager pathManager;
+        // 현재 경로(격자 노드들의 월드 좌표 목록)와 인덱스
+        private List<Vector3> path;
+        private int currentPathIndex = 0;
 
+        // 새로운 경로의 목적지를 지정하는 방법은 Commander나 다른 매니저에서 결정할 수 있습니다.
+        // 여기서는 예시로 격자 내 무작위 노드를 목표로 선택합니다.
         public void OnCreate()
         {
             pathManager = MLApp.GetService<PathManager>();
+            RequestNewPath();
         }
 
-        void Update()
+        private void Update()
         {
-            MoveTowardsDestination();
+            if (path == null || path.Count == 0)
+                return;
 
-            // 목적지에 도달하면 다음 거점을 요청
-            if (Vector3.Distance(transform.position, currentDestination) <= arrivalThreshold)
+            Vector3 targetPoint = path[currentPathIndex];
+            MoveTowards(targetPoint);
+
+            if (Vector3.Distance(transform.position, targetPoint) <= arrivalThreshold)
             {
-                currentDestination = pathManager.GetRandomWayPoint();
+                currentPathIndex++;
+                if (currentPathIndex >= path.Count)
+                {
+                    // 전체 경로를 완료하면 새 경로 요청 (또는 다른 행동을 할 수 있음)
+                    RequestNewPath();
+                }
             }
-
-            //bool onPath = false;
-            //// PathManager의 모든 선분을 순회하며 현재 위치가 경로 상에 있는지 확인
-            //foreach (SegmentData segment in pathManager.segments)
-            //{
-            //    if (segment.IsPointOnSegment(transform.position, checkTolerance))
-            //    {
-            //        onPath = true;
-            //        break;
-            //    }
-            //}
-
-            //// 만약 Agent의 위치가 경로 위에 있지 않으면, 가장 가까운 경로 점으로 보정
-            //if (!onPath)
-            //{
-            //    transform.position = pathManager.GetNearestPointOnPath(transform.position);
-            //}
         }
 
-        // 현재 목적지를 향해 Agent 이동
-        void MoveTowardsDestination()
+        private void RequestNewPath()
+        {
+            path = pathManager.RequestNewPath(transform.position);
+            currentPathIndex = 0;
+        }
+
+        private void MoveTowards(Vector3 target)
         {
             float step = speed * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, currentDestination, step);
+            transform.position = Vector3.MoveTowards(transform.position, target, step);
         }
     }
-
 }
