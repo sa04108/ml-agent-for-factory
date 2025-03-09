@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MlAgent
+namespace MAFF
 {
-    public enum PathAlgorithm { AStar, Dijkstra }
+    public enum PathAlgorithm { None, AStar, Dijkstra }
 
     public class GridPathFinder
     {

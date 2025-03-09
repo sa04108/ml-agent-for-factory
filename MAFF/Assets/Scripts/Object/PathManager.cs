@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MlAgent
+namespace MAFF
 {
     public struct GridInfo
     {
@@ -10,7 +10,7 @@ namespace MlAgent
         public float CellSize;
     }
 
-    public class PathManager : MonoBehaviour, Service
+    public class PathManager : MonoBehaviour
     {
         private GridPathFinder pathFinder;
         // 모든 Segment 데이터를 저장할 리스트
@@ -20,23 +20,17 @@ namespace MlAgent
 
         private GridInfo grid = new();
         public GridInfo Grid => grid;
-        private PathAlgorithm algorithm;
 
         // 계산된 격자 정보
         public int Columns => grid.Columns;
         public int Rows => grid.Rows;
         public float CellSize => grid.CellSize;
 
-        public void OnInit()
+        public void Initialize(PathAlgorithm algorithm)
         {
             UpdatePathData();
 
             pathFinder = new(grid, algorithm);
-        }
-
-        public void SetPathAlgorithm(PathAlgorithm algorithm)
-        {
-            this.algorithm = algorithm;
         }
 
         public void UpdatePathData()
@@ -124,18 +118,25 @@ namespace MlAgent
             return false;
         }
 
-        public Vector3 GetRandomWayPoint()
+        public Vector3 GetRandomWayPoint(Vector3 targetRallyPoint)
         {
             if (waypoints.Count == 0)
-            {
-                Debug.LogWarning("WayPoints are not set");
                 return Vector3.zero;
+
+            int index = Random.Range(0, waypoints.Count);
+            Vector3 newPoint = waypoints[index];
+
+            // 가능한 경우, 이전 랠리 포인트와 중복되지 않도록 함
+            if (newPoint == targetRallyPoint && waypoints.Count > 1)
+            {
+                index = (index + 1) % waypoints.Count;
+                newPoint = waypoints[index];
             }
 
-            return waypoints[Random.Range(0, waypoints.Count)];
+            return newPoint;
         }
 
-        public List<Vector3> RequestNewPath(Vector3 position)
+        public List<Vector3> GetNewPath(Vector3 position)
         {
             // 격자 내 무작위 노드를 목적지로 선택 (노드는 0~columns, 0~rows)
             int targetX = Random.Range(0, grid.Columns + 1);
@@ -144,6 +145,19 @@ namespace MlAgent
 
             // 현재 Agent의 위치와 목적지 사이의 경로를 탐색
             return pathFinder.FindPath(position, destination);
+        }
+
+        public bool IsOnSegment(Vector3 position, float tolerance)
+        {
+            foreach (SegmentData seg in segments)
+            {
+                if (seg.IsPointOnSegment(position, tolerance))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 
