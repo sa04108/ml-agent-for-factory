@@ -1,4 +1,5 @@
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class GridCreator : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class GridCreator : MonoBehaviour
     private const string gridLinePrefix = "GridLine_";
 
     // 컨텍스트 메뉴에서 실행할 수 있는 메서드
-    [ContextMenu("Generate Grid")]
+    [Button("Generate Grid")]
     public void GenerateGrid()
     {
         // 기존의 격자 라인이 있다면 모두 삭제
@@ -64,7 +65,7 @@ public class GridCreator : MonoBehaviour
     }
 
     // 기존의 격자 라인을 삭제하는 함수
-    [ContextMenu("Clear Grid")]
+    [Button("Clear Grid")]
     public void ClearGridLines()
     {
         for (int i = transform.childCount - 1; i >= 0; i--)

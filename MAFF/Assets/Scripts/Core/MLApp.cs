@@ -16,7 +16,7 @@ namespace MAFF
         protected override void Awake()
         {
             base.Awake();
-            pathManager.Initialize(pathAlgorithm);
+            pathManager.Initialize();
         }
 
         public static void Play()

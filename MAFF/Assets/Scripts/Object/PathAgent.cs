@@ -10,115 +10,104 @@ namespace MAFF
     public class PathAgent : Agent
     {
         [Header("Options")]
-        [Tooltip("Agent가 이동할 속도 (초당 단위 거리)")]
-        public float speed = 5f;
-        [Tooltip("Agent가 Segment 위에 있다고 판단하는 허용 오차")]
-        public float segmentTolerance = 0.1f;
-        [Tooltip("목적지에 도착했다고 판단하는 임계값")]
-        public float arrivalThreshold = 0.1f;
+        [SerializeField, Tooltip("Agent의 최고 이동 속도 (초당 단위 거리)")]
+        private float speed = 1f;
+        [SerializeField, Tooltip("Agent가 특정 위치에 있음을 판단하는 허용 오차")]
+        private float tolerance = 0.1f;
 
         [Header("Rewards")]
-        [Tooltip("목적지에 도착할 때 받는 보상")]
-        public float rewardForArrived = 1.0f;
+        [SerializeField, Tooltip("다음 포인트에 도착할 때 받는 보상")]
+        private float rewardForNextPoint = 3.0f;
+        [SerializeField, Tooltip("목적지에 도착할 때 받는 보상")]
+        private float rewardForArrived = 10.0f;
+        [SerializeField, Tooltip("Segment를 벗어날 때 받는 보상")]
+        private float rewardForOffSegment = -15.0f;
+        [SerializeField, Tooltip("다른 Agent와 충돌할 때 받는 보상")]
+        private float rewardForCollision = -20.0f;
+
+        [Header("Unity Links")]
+        [SerializeField]
+        private ParticleSystem particle;
 
         private PathManager pathManager;
-        private Vector3 startPosition;
-        private Vector3 targetRallyPoint;
+
         // 현재 경로(격자 노드들의 월드 좌표 목록)와 인덱스
-        private List<Vector3> path;
+        private List<Node> path;
         private int currentPathIndex = 0;
+        private Node homeNode;
+        private Node currentPathNode;
 
         private void Start()
         {
             pathManager = MLApp.Instance.PathManager;
-            startPosition = transform.position;
-
-            if (MLApp.Instance.PathAlgorithm != PathAlgorithm.None )
-            {
-                UpdateWithAlgorithm();
-            }
-        }
-
-        private void UpdateWithAlgorithm()
-        {
-            path = pathManager.GetNewPath(transform.position);
-
-            StartCoroutine(CoUpdateWithAlgorithm());
-        }
-
-        private IEnumerator CoUpdateWithAlgorithm()
-        {
-            if (path == null || path.Count == 0)
-                yield break;
-
-            while (MLApp.Instance.PathAlgorithm != PathAlgorithm.None)
-            {
-                Vector3 targetPoint = path[currentPathIndex];
-                float step = speed * Time.deltaTime;
-                transform.position = Vector3.MoveTowards(transform.position, targetPoint, step);
-
-                if (Vector3.Distance(transform.position, targetPoint) <= arrivalThreshold)
-                {
-                    currentPathIndex++;
-                    if (currentPathIndex >= path.Count)
-                    {
-                        // 전체 경로를 완료하면 새 경로 요청 (또는 다른 행동을 할 수 있음)
-                        path = pathManager.GetNewPath(transform.position);
-                        currentPathIndex = 0;
-                    }
-                }
-
-                yield return null;
-            }
+            homeNode = pathManager.FindNearestNode(transform.position);
+            currentPathNode = homeNode;
+            transform.position = currentPathNode.position;
         }
 
         public override void OnEpisodeBegin()
         {
-            transform.position = startPosition;
-
-            // 새로운 랠리 포인트를 요청
-            RequestNextRallyPoint();
+            currentPathIndex = 0;
+            path = pathManager.FindPath(currentPathNode);
         }
 
         public override void CollectObservations(VectorSensor sensor)
         {
             // Agent의 현재 위치
             sensor.AddObservation(transform.position);
-            // 목표 랠리 포인트의 위치
-            sensor.AddObservation(targetRallyPoint);
-            // 목표로 향하는 방향 (정규화)
-            sensor.AddObservation((targetRallyPoint - transform.position).normalized);
+            // Path의 다음 위치
+            sensor.AddObservation(path[currentPathIndex].position);
+            // Path의 다음 위치로의 방향
+            sensor.AddObservation((path[currentPathIndex].position - transform.position).normalized);
         }
 
         public override void OnActionReceived(ActionBuffers actionBuffers)
         {
             // 연속 액션: 두 개의 값(x, z)으로 이동 방향 결정
-            float moveX = actionBuffers.ContinuousActions[0];
-            float moveZ = actionBuffers.ContinuousActions[1];
-            Vector3 moveDir = new Vector3(moveX, 0f, moveZ).normalized;
+            float dirX = actionBuffers.ContinuousActions[0];
+            float dirZ = actionBuffers.ContinuousActions[1];
+            Vector3 actionDir = new Vector3(dirX, 0, dirZ).normalized;
 
-            // Agent 이동 (시간에 따른 보간)
-            transform.position += moveDir * speed * Time.deltaTime;
+            Vector3 nextPoint = path[currentPathIndex].position;
+            Vector3 desiredDir = (nextPoint - transform.position).normalized;
 
-            // 랠리 포인트에 도달하면 보상을 주고 다음 랠리 포인트를 요청
-            if (Vector3.Distance(transform.position, targetRallyPoint) < segmentTolerance)
+            transform.position += actionDir * speed * Time.deltaTime;
+
+            // Segment를 벗어나려고 시도하면 에피소드 종료
+            if (Vector3.Dot(actionDir, desiredDir) < 0.8f)
             {
-                SetReward(rewardForArrived);
-                RequestNextRallyPoint();
+                AddReward(rewardForOffSegment);
+                EndEpisode();
+
+                return;
             }
 
-            // 세그먼트 밖으로 벗어나면 에피소드 종료
-            if (!pathManager.IsOnSegment(transform.position, segmentTolerance))
+            // 랠리 포인트에 도달하면 다음 랠리 포인트를 요청
+            if (Vector3.Distance(transform.position, nextPoint) <= tolerance)
             {
-                EndEpisode();
+                // 목적지에 도착시 보상을 주고 에피소드 종료
+                if (currentPathNode == path[path.Count - 1])
+                {
+                    AddReward(rewardForArrived);
+                    particle.Play();
+
+                    EndEpisode();
+                }
+                else
+                {
+                    AddReward(rewardForNextPoint);
+                }
+
+                currentPathIndex++;
+                currentPathNode = path[currentPathIndex];
             }
         }
 
-        // 휴리스틱: 테스트 시, 목표를 향해 직접 이동하도록 함
+        // 휴리스틱: 테스트 시 현재 Path의 목적지로 이동
         public override void Heuristic(in ActionBuffers actionsOut)
         {
             var continuousActionsOut = actionsOut.ContinuousActions;
-            Vector3 direction = (targetRallyPoint - transform.position).normalized;
+            Vector3 direction = (path[currentPathIndex].position - transform.position).normalized;
             continuousActionsOut[0] = direction.x;
             continuousActionsOut[1] = direction.z;
         }
@@ -128,14 +117,9 @@ namespace MAFF
         {
             if (other.gameObject.CompareTag("Agent"))
             {
+                AddReward(rewardForCollision);
                 EndEpisode();
             }
-        }
-
-        // PathManager의 교차점(waypoints) 중 무작위로 새로운 랠리 포인트를 선택
-        private void RequestNextRallyPoint()
-        {
-            targetRallyPoint = pathManager.GetRandomWayPoint(targetRallyPoint);
         }
     }
 }

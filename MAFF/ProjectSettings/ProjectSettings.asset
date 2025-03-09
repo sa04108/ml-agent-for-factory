@@ -82,7 +82,7 @@ PlayerSettings:
   androidApplicationEntry: 2
   defaultIsNativeResolution: 1
   macRetinaSupport: 1
-  runInBackground: 0
+  runInBackground: 1
   muteOtherAudioSources: 0
   Prepare IOS For Recording: 0
   Force IOS Speakers When Recording: 0
@@ -824,7 +824,7 @@ PlayerSettings:
     PS4: ENABLE_JSON_CATALOG
     QNX: ENABLE_JSON_CATALOG
     Server: ENABLE_JSON_CATALOG
-    Standalone: ENABLE_JSON_CATALOG
+    Standalone: ENABLE_JSON_CATALOG;ODIN_INSPECTOR;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1;ODIN_INSPECTOR_3_2;ODIN_INSPECTOR_3_3
     WebGL: ENABLE_JSON_CATALOG
     Windows Store Apps: ENABLE_JSON_CATALOG
     XboxOne: ENABLE_JSON_CATALOG

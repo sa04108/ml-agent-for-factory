@@ -1,191 +1,142 @@
+using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace MAFF
 {
-    public struct GridInfo
-    {
-        public int Columns;
-        public int Rows;
-        public float CellSize;
-    }
-
     public class PathManager : MonoBehaviour
     {
-        private GridPathFinder pathFinder;
-        // 모든 Segment 데이터를 저장할 리스트
-        private List<SegmentData> segments = new();
-        // 거점(waypoint) 목록: 각 LineRenderer의 시작점
-        private List<Vector3> waypoints = new();
+        private PathFinder pathFinder;
 
-        private GridInfo grid = new();
-        public GridInfo Grid => grid;
+        [Header("Node List")]
+        [Tooltip("배치할 Node들을 순서대로 드래그합니다.")]
+        [SerializeField]
+        private List<Node> nodes = new List<Node>();
 
-        // 계산된 격자 정보
-        public int Columns => grid.Columns;
-        public int Rows => grid.Rows;
-        public float CellSize => grid.CellSize;
+        [Header("Segment Settings")]
+        [Tooltip("LineRenderer의 선 두께")]
+        [SerializeField]
+        public float lineWidth = 0.2f;
+        [Tooltip("Segment에 사용할 재질")]
+        [SerializeField]
+        public Material lineMaterial;
 
-        public void Initialize(PathAlgorithm algorithm)
+        // 생성된 Segment들을 저장하는 리스트
+        [ReadOnly, SerializeField]
+        private List<Segment> segments = new List<Segment>();
+
+        public void Initialize()
         {
-            UpdatePathData();
+            if (nodes.Count <= 1 || segments.Count == 0)
+            {
+                Debug.LogError("Not enough nodes and segments to construct evironment");
+                Application.Quit();
+            }
 
-            pathFinder = new(grid, algorithm);
+            pathFinder = new(nodes, segments);
         }
 
-        public void UpdatePathData()
+        private Node GetRandomNode(Node node)
         {
+            var idx = Random.Range(0, nodes.Count);
+            var targetNode = nodes[idx];
+
+            if (node == nodes[idx])
+            {
+                return nodes[(idx + 1) % nodes.Count];
+            }
+
+            return targetNode;
+        }
+
+        public Node FindNearestNode(Vector3 position)
+        {
+            Node targetNode = nodes[0];
+            float minDist = float.PositiveInfinity;
+
+            foreach (var node in nodes)
+            {
+                var dist = Vector3.Distance(position, node.position);
+                if (dist < minDist)
+                {
+                    targetNode = node;
+                    minDist = dist;
+                }
+            }
+
+            return targetNode;
+        }
+
+        public List<Node> FindPath(Node startNode)
+        {
+            return pathFinder.FindPath(startNode, GetRandomNode(startNode), MLApp.Instance.PathAlgorithm);
+        }
+
+        [Button]
+        public void CreateSegments()
+        {
+            // nodes 리스트의 순서대로 인접한 두 노드를 연결하는 Segment 생성
+            for (int i = 0; i < nodes.Count - 1; i++)
+            {
+                Node startNode = nodes[i];
+                Node endNode = nodes[i + 1];
+                CreateSegment(startNode, endNode);
+            }
+        }
+
+        private void CreateSegment(Node startNode, Node endNode)
+        {
+            // 새로운 Segment GameObject 생성
+            GameObject segmentObj = new GameObject($"Segment_{startNode.name}_{endNode.name}");
+            segmentObj.transform.parent = this.transform;
+
+            // LineRenderer 추가 및 설정
+            LineRenderer lr = segmentObj.AddComponent<LineRenderer>();
+            lr.positionCount = 2;
+            lr.SetPosition(0, startNode.position);
+            lr.SetPosition(1, endNode.position);
+            lr.startWidth = lineWidth;
+            lr.endWidth = lineWidth;
+            lr.useWorldSpace = true;
+            lr.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+
+            if (lineMaterial != null)
+                lr.material = lineMaterial;
+            else
+                lr.material = new Material(Shader.Find("Sprites/Default"));
+
+            // SegmentComponent 추가해 두 노드 정보를 기록
+            Segment segComp = segmentObj.AddComponent<Segment>();
+            segComp.start = startNode;
+            segComp.end = endNode;
+
+            segments.Add(segComp);
+        }
+
+        [Button]
+        public void UpdateSegmentsByChildren()
+        {
+            segments = GetComponentsInChildren<Segment>().ToList();
+        }
+
+        [Button]
+        public void ClearSegments()
+        {
+            // 이전에 생성된 세그먼트들을 모두 삭제
+            foreach (Segment seg in segments)
+            {
+                if (seg != null)
+                {
+#if UNITY_EDITOR
+                    UnityEditor.EditorApplication.delayCall += () => { DestroyImmediate(seg.gameObject); };
+#else
+                Destroy(seg.gameObject);
+#endif
+                }
+            }
             segments.Clear();
-            waypoints.Clear();
-
-            LineRenderer[] lrList = GetComponentsInChildren<LineRenderer>();
-            // 수직 Edge의 x좌표, 수평 Edge의 z좌표 (중복 없이 저장)
-            List<float> verticalXCoords = new List<float>();
-            List<float> horizontalZCoords = new List<float>();
-
-            foreach (LineRenderer lr in lrList)
-            {
-                if (lr.positionCount < 2)
-                    continue;
-
-                Vector3 start = lr.GetPosition(0);
-                Vector3 end = lr.GetPosition(1);
-
-                // Segment 데이터 등록
-                segments.Add(new SegmentData(start, end));
-
-                // 수직 Edge: x 좌표 차이가 거의 없으면
-                if (Mathf.Abs(start.x - end.x) < 0.001f)
-                {
-                    if (!ContainsApproximately(verticalXCoords, start.x))
-                    {
-                        verticalXCoords.Add(start.x);
-                    }
-                }
-                // 수평 Edge: z 좌표 차이가 거의 없으면
-                if (Mathf.Abs(start.z - end.z) < 0.001f)
-                {
-                    if (!ContainsApproximately(horizontalZCoords, start.z))
-                    {
-                        horizontalZCoords.Add(start.z);
-                    }
-                }
-            }
-
-            // 정렬 (오름차순)
-            verticalXCoords.Sort();
-            horizontalZCoords.Sort();
-
-            // 열(columns): 수직선 개수 - 1
-            if (verticalXCoords.Count > 1)
-            {
-                grid.Columns = verticalXCoords.Count - 1;
-                // 인접한 x 좌표 차이를 cellSize로 사용
-                grid.CellSize = verticalXCoords[1] - verticalXCoords[0];
-            }
-
-            // 행(rows): 수평선 개수 - 1
-            if (horizontalZCoords.Count > 1)
-            {
-                grid.Rows = horizontalZCoords.Count - 1;
-                float horizontalCellSize = horizontalZCoords[1] - horizontalZCoords[0];
-                // cellSize가 아직 0이면 설정, 아니라면 평균 처리(격자가 정사각형이라면 두 값는 같을 것)
-                if (Mathf.Approximately(CellSize, 0f))
-                    grid.CellSize = horizontalCellSize;
-                else
-                    grid.CellSize = (CellSize + horizontalCellSize) * 0.5f;
-            }
-
-            // 격자 교차점(노드)를 생성: 각 수직선과 수평선의 교차점
-            for (int i = 0; i < verticalXCoords.Count; i++)
-            {
-                for (int j = 0; j < horizontalZCoords.Count; j++)
-                {
-                    Vector3 node = new Vector3(verticalXCoords[i], 0f, horizontalZCoords[j]);
-                    waypoints.Add(node);
-                }
-            }
-        }
-
-        // 리스트에 이미 value와 거의 동일한 값이 존재하는지 확인 (tolerance 사용)
-        private bool ContainsApproximately(List<float> list, float value)
-        {
-            foreach (float f in list)
-            {
-                if (Mathf.Abs(f - value) < 0.001f)
-                    return true;
-            }
-            return false;
-        }
-
-        public Vector3 GetRandomWayPoint(Vector3 targetRallyPoint)
-        {
-            if (waypoints.Count == 0)
-                return Vector3.zero;
-
-            int index = Random.Range(0, waypoints.Count);
-            Vector3 newPoint = waypoints[index];
-
-            // 가능한 경우, 이전 랠리 포인트와 중복되지 않도록 함
-            if (newPoint == targetRallyPoint && waypoints.Count > 1)
-            {
-                index = (index + 1) % waypoints.Count;
-                newPoint = waypoints[index];
-            }
-
-            return newPoint;
-        }
-
-        public List<Vector3> GetNewPath(Vector3 position)
-        {
-            // 격자 내 무작위 노드를 목적지로 선택 (노드는 0~columns, 0~rows)
-            int targetX = Random.Range(0, grid.Columns + 1);
-            int targetY = Random.Range(0, grid.Rows + 1);
-            Vector3 destination = new Vector3(targetX * grid.CellSize, position.y, targetY * grid.CellSize);
-
-            // 현재 Agent의 위치와 목적지 사이의 경로를 탐색
-            return pathFinder.FindPath(position, destination);
-        }
-
-        public bool IsOnSegment(Vector3 position, float tolerance)
-        {
-            foreach (SegmentData seg in segments)
-            {
-                if (seg.IsPointOnSegment(position, tolerance))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-    }
-
-    // 하나의 선분(Segment) 정보를 담는 클래스
-    public class SegmentData
-    {
-        public Vector3 start;
-        public Vector3 end;
-
-        public SegmentData(Vector3 start, Vector3 end)
-        {
-            this.start = start;
-            this.end = end;
-        }
-
-        // 주어진 point가 이 선분 위에 있는지 (tolerance 범위 내) 확인하는 메서드
-        public bool IsPointOnSegment(Vector3 point, float tolerance = 0.1f)
-        {
-            Vector3 segDir = (end - start).normalized;
-            float segLength = Vector3.Distance(start, end);
-            Vector3 projected = Vector3.Project(point - start, segDir);
-            float projectedLength = projected.magnitude;
-            // 프로젝션 길이가 선분의 길이 범위 내에 있는지 체크
-            if (projectedLength < 0 || projectedLength > segLength)
-                return false;
-            Vector3 closestPoint = start + segDir * projectedLength;
-            // 선분에서의 최단 거리와 tolerance 비교
-            return Vector3.Distance(point, closestPoint) <= tolerance;
         }
     }
 }
