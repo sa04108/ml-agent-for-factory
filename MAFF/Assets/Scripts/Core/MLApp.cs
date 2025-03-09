@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace MAFF
@@ -19,6 +17,13 @@ namespace MAFF
         {
             base.Awake();
             pathManager.Initialize(pathAlgorithm);
+        }
+
+        public static void Play()
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = true;
+#endif
         }
     }
 }
