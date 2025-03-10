@@ -33,22 +33,26 @@ namespace MAFF
 
         // 현재 경로(격자 노드들의 월드 좌표 목록)와 인덱스
         private List<Node> path;
-        private int currentPathIndex = 0;
-        private Node homeNode;
-        private Node currentPathNode;
+        private Node lastNode;
+        private int nextNodeIndex;
 
         private void Start()
         {
             pathManager = MLApp.Instance.PathManager;
-            homeNode = pathManager.FindNearestNode(transform.position);
-            currentPathNode = homeNode;
-            transform.position = currentPathNode.position;
+
+            var homeNode = pathManager.FindNearestNode(transform.position);
+            lastNode = homeNode;
         }
 
         public override void OnEpisodeBegin()
         {
-            currentPathIndex = 0;
-            path = pathManager.FindPath(currentPathNode);
+            path = pathManager.FindPath(lastNode);
+            nextNodeIndex = 0;
+
+            if (path.Count <= 1)
+            {
+                Debug.LogWarning("Path must include at least 2 nodes");
+            }
         }
 
         public override void CollectObservations(VectorSensor sensor)
@@ -56,9 +60,9 @@ namespace MAFF
             // Agent의 현재 위치
             sensor.AddObservation(transform.position);
             // Path의 다음 위치
-            sensor.AddObservation(path[currentPathIndex].position);
+            sensor.AddObservation(path[nextNodeIndex].position);
             // Path의 다음 위치로의 방향
-            sensor.AddObservation((path[currentPathIndex].position - transform.position).normalized);
+            sensor.AddObservation((path[nextNodeIndex].position - transform.position).normalized);
         }
 
         public override void OnActionReceived(ActionBuffers actionBuffers)
@@ -68,7 +72,7 @@ namespace MAFF
             float dirZ = actionBuffers.ContinuousActions[1];
             Vector3 actionDir = new Vector3(dirX, 0, dirZ).normalized;
 
-            Vector3 nextPoint = path[currentPathIndex].position;
+            Vector3 nextPoint = path[nextNodeIndex].position;
             Vector3 desiredDir = (nextPoint - transform.position).normalized;
 
             transform.position += actionDir * speed * Time.deltaTime;
@@ -82,15 +86,14 @@ namespace MAFF
                 return;
             }
 
-            // 랠리 포인트에 도달하면 다음 랠리 포인트를 요청
+            // 경유지에 도착하면 다음 경유지를 요청
             if (Vector3.Distance(transform.position, nextPoint) <= tolerance)
             {
                 // 목적지에 도착시 보상을 주고 에피소드 종료
-                if (currentPathNode == path[path.Count - 1])
+                if (nextNodeIndex == path.Count - 1)
                 {
-                    AddReward(rewardForArrived);
                     particle.Play();
-
+                    AddReward(rewardForArrived);
                     EndEpisode();
                 }
                 else
@@ -98,8 +101,7 @@ namespace MAFF
                     AddReward(rewardForNextPoint);
                 }
 
-                currentPathIndex++;
-                currentPathNode = path[currentPathIndex];
+                lastNode = path[nextNodeIndex++];
             }
         }
 
@@ -107,7 +109,7 @@ namespace MAFF
         public override void Heuristic(in ActionBuffers actionsOut)
         {
             var continuousActionsOut = actionsOut.ContinuousActions;
-            Vector3 direction = (path[currentPathIndex].position - transform.position).normalized;
+            Vector3 direction = (path[nextNodeIndex].position - transform.position).normalized;
             continuousActionsOut[0] = direction.x;
             continuousActionsOut[1] = direction.z;
         }
