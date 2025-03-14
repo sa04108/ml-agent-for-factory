@@ -626,7 +626,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 575289409442645027, guid: fbaa4de46f6792f4b9bb95e71ce77dd4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4669914522352650675, guid: fbaa4de46f6792f4b9bb95e71ce77dd4, type: 3}
       propertyPath: color.b
@@ -687,7 +687,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5744465689302221747, guid: fbaa4de46f6792f4b9bb95e71ce77dd4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: fbaa4de46f6792f4b9bb95e71ce77dd4, type: 3}
 --- !u!4 &106666449 stripped
 Transform:
@@ -6889,7 +6892,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 575289409442645027, guid: fbaa4de46f6792f4b9bb95e71ce77dd4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4669914522352650675, guid: fbaa4de46f6792f4b9bb95e71ce77dd4, type: 3}
       propertyPath: color.b
@@ -6950,7 +6953,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5744465689302221747, guid: fbaa4de46f6792f4b9bb95e71ce77dd4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: fbaa4de46f6792f4b9bb95e71ce77dd4, type: 3}
 --- !u!4 &1951776639 stripped
 Transform:
