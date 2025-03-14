@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
@@ -12,7 +11,7 @@ namespace MAFF
         [Header("Options")]
         [SerializeField, Tooltip("Agent의 최고 이동 속도 (초당 단위 거리)")]
         private float speed = 1f;
-        [SerializeField, Tooltip("Agent가 특정 위치에 있음을 판단하는 허용 오차")]
+        [SerializeField, Tooltip("Agent가 포인트에 있음을 판단하는 허용 오차")]
         private float tolerance = 0.1f;
 
         [Header("Rewards")]
@@ -34,6 +33,7 @@ namespace MAFF
         // 현재 경로(격자 노드들의 월드 좌표 목록)와 인덱스
         private List<Node> path;
         private Node lastNode;
+        private Node lastGoalNode;
         private int nextNodeIndex;
 
         private void Start()
@@ -46,13 +46,9 @@ namespace MAFF
 
         public override void OnEpisodeBegin()
         {
-            path = pathManager.FindPath(lastNode);
-            nextNodeIndex = 0;
-
-            if (path.Count <= 1)
-            {
-                Debug.LogWarning("Path must include at least 2 nodes");
-            }
+            path = pathManager.FindPath(lastNode, lastGoalNode);
+            lastGoalNode = path[path.Count - 1];
+            nextNodeIndex = 1;
         }
 
         public override void CollectObservations(VectorSensor sensor)
@@ -72,12 +68,11 @@ namespace MAFF
             float dirZ = actionBuffers.ContinuousActions[1];
             Vector3 actionDir = new Vector3(dirX, 0, dirZ).normalized;
 
-            Vector3 nextPoint = path[nextNodeIndex].position;
-            Vector3 desiredDir = (nextPoint - transform.position).normalized;
-
             transform.position += actionDir * speed * Time.deltaTime;
 
             // Segment를 벗어나려고 시도하면 에피소드 종료
+            Vector3 nextPoint = path[nextNodeIndex].position;
+            Vector3 desiredDir = (nextPoint - transform.position).normalized;
             if (Vector3.Dot(actionDir, desiredDir) < 0.8f)
             {
                 AddReward(rewardForOffSegment);
@@ -89,9 +84,12 @@ namespace MAFF
             // 경유지에 도착하면 다음 경유지를 요청
             if (Vector3.Distance(transform.position, nextPoint) <= tolerance)
             {
+                lastNode = path[nextNodeIndex];
+
                 // 목적지에 도착시 보상을 주고 에피소드 종료
                 if (nextNodeIndex == path.Count - 1)
                 {
+                    lastGoalNode = null;
                     particle.Play();
                     AddReward(rewardForArrived);
                     EndEpisode();
@@ -101,7 +99,7 @@ namespace MAFF
                     AddReward(rewardForNextPoint);
                 }
 
-                lastNode = path[nextNodeIndex++];
+                nextNodeIndex = Mathf.Clamp(nextNodeIndex + 1, 0, path.Count - 1);
             }
         }
 
@@ -114,7 +112,7 @@ namespace MAFF
             continuousActionsOut[1] = direction.z;
         }
 
-        // 다른 Agent와 충돌 시 에피소드 종료
+        // 다른 Agent의 충돌 위험 포착시 경로 수정
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.CompareTag("Agent"))
@@ -122,6 +120,45 @@ namespace MAFF
                 AddReward(rewardForCollision);
                 EndEpisode();
             }
+        }
+
+#if UNITY_EDITOR
+        private void OnDrawGizmos()
+        {
+            if (path == null || path.Count == 0)
+                return;
+
+            UnityEditor.Handles.color = GetComponent<ObjectColor>().color;
+            Vector3[] points = new Vector3[path.Count];
+            for (int i = 0; i < path.Count; i++)
+            {
+                if (path[i] != null)
+                    points[i] = path[i].position;
+            }
+            UnityEditor.Handles.DrawAAPolyLine(8f, points);
+        }
+#endif
+
+        private bool IsAgentOnSegment(Vector3 start, Vector3 end, float tolerance)
+        {
+            // 선분의 방향과 길이 계산
+            Vector3 segmentDirection = (end - start).normalized;
+            float segmentLength = Vector3.Distance(start, end);
+
+            // 에이전트 위치를 선분의 시작점으로부터의 벡터로 만들고, 선분 방향으로 투영
+            Vector3 agentVector = transform.position - start;
+            float projectedLength = Vector3.Dot(agentVector, segmentDirection);
+
+            // 투영 길이가 선분의 길이 범위 내에 있는지 확인합니다.
+            if (projectedLength < 0 || projectedLength > segmentLength)
+                return false;
+
+            // 투영한 점(선분 위의 가장 가까운 점) 계산
+            Vector3 closestPoint = start + segmentDirection * projectedLength;
+            float distanceFromSegment = Vector3.Distance(transform.position, closestPoint);
+
+            // 에이전트가 선으로부터 tolerance 이내에 있으면 true 반환
+            return distanceFromSegment <= tolerance;
         }
     }
 }

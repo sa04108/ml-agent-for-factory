@@ -69,9 +69,12 @@ namespace MAFF
             return targetNode;
         }
 
-        public List<Node> FindPath(Node startNode)
+        public List<Node> FindPath(Node startNode, Node endNode = null)
         {
-            return pathFinder.FindPath(startNode, GetRandomNode(startNode), MLApp.Instance.PathAlgorithm);
+            if (endNode == null)
+                endNode = GetRandomNode(startNode);
+
+            return pathFinder.FindPath(startNode, endNode, MLApp.Instance.PathAlgorithm);
         }
 
         [Button]
