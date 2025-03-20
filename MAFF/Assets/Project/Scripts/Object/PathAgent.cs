@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
@@ -10,7 +11,7 @@ namespace MAFF
     {
         [Header("Options")]
         [SerializeField, Tooltip("Agent의 최고 이동 속도 (초당 단위 거리)")]
-        private float speed = 1f;
+        private float maxSpeed = 5f;
         [SerializeField, Tooltip("Agent가 포인트에 있음을 판단하는 허용 오차")]
         private float tolerance = 0.1f;
 
@@ -30,6 +31,7 @@ namespace MAFF
 
         private PathManager pathManager;
 
+        private float speed;
         // 현재 경로(격자 노드들의 월드 좌표 목록)와 인덱스
         private List<Node> path;
         private Node lastNode;
@@ -38,7 +40,7 @@ namespace MAFF
 
         private void Start()
         {
-            pathManager = MLApp.Instance.PathManager;
+            pathManager = App.Instance.PathManager;
 
             var homeNode = pathManager.FindNearestNode(transform.position);
             lastNode = homeNode;
@@ -53,6 +55,8 @@ namespace MAFF
 
         public override void CollectObservations(VectorSensor sensor)
         {
+            // Agent의 현재 속도
+            sensor.AddObservation(speed);
             // Agent의 현재 위치
             sensor.AddObservation(transform.position);
             // Path의 다음 위치
@@ -66,6 +70,7 @@ namespace MAFF
             // 연속 액션: 두 개의 값(x, z)으로 이동 방향 결정
             float dirX = actionBuffers.ContinuousActions[0];
             float dirZ = actionBuffers.ContinuousActions[1];
+            speed = Mathf.Clamp(0, actionBuffers.ContinuousActions[2], maxSpeed);
             Vector3 actionDir = new Vector3(dirX, 0, dirZ).normalized;
 
             transform.position += actionDir * speed * Time.deltaTime;
@@ -110,6 +115,7 @@ namespace MAFF
             Vector3 direction = (path[nextNodeIndex].position - transform.position).normalized;
             continuousActionsOut[0] = direction.x;
             continuousActionsOut[1] = direction.z;
+            continuousActionsOut[2] = maxSpeed;
         }
 
         // 다른 Agent의 충돌 위험 포착시 경로 수정

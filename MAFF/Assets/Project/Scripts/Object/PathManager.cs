@@ -1,7 +1,6 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace MAFF
@@ -74,7 +73,7 @@ namespace MAFF
             if (endNode == null)
                 endNode = GetRandomNode(startNode);
 
-            return pathFinder.FindPath(startNode, endNode, MLApp.Instance.PathAlgorithm);
+            return pathFinder.FindPath(startNode, endNode, App.Instance.PathAlgorithm);
         }
 
         [Button]

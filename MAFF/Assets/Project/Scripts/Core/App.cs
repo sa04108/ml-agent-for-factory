@@ -2,11 +2,9 @@ using UnityEngine;
 
 namespace MAFF
 {
-    public class MLApp : Singleton<MLApp>
+    public class App : Singleton<App>
     {
-        [Header("Agent")]
-
-        [Header("Path")]
+        [Header("Links")]
         [SerializeField] private PathAlgorithm pathAlgorithm;
         [SerializeField] private PathManager pathManager;
 
@@ -17,13 +15,6 @@ namespace MAFF
         {
             base.Awake();
             pathManager.Initialize();
-        }
-
-        public static void Play()
-        {
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = true;
-#endif
         }
     }
 }
