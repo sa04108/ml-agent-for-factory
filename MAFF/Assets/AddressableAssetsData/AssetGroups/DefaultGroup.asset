@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: DefaultGroup
+  m_EditorClassIdentifier: 
+  m_GroupName: DefaultGroup
+  m_GUID: 988add5c52899164a8f285ae8b9299f6
+  m_SerializeEntries:
+  - m_GUID: 0c3aff987d403ee4483c6663a8ee6c4d
+    m_Address: Assets/AddressableAssets/__Fire_Alarm
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 15ea2bdf3994b2045b78353dcbaa42f0
+    m_Address: Assets/AddressableAssets/__Door_Large
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 618052dbba9a4bb499d4740de09b552d
+    m_Address: Assets/AddressableAssets/__Medkit
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6250b14fff1a8ef4aa57b81864d967b1
+    m_Address: Assets/AddressableAssets/__Fire_Closet
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: be6c8030bef7fea4288e4d3d03c2c2ed
+    m_Address: Assets/AddressableAssets/__Door
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f02f0c53c078d854190519649badc062
+    m_Address: Assets/AddressableAssets/__Fire_Extinguisher
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 94d62c24ca74a1d49b5dd607cb555d62, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: dcdece82308d11c47bdc4497ac4a7f6b, type: 2}
+    - {fileID: 11400000, guid: 46d4befe338c7334c98233dc0feed27a, type: 2}
