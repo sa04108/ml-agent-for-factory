@@ -118,10 +118,6 @@ namespace Merlin
             // 임포트된 에셋 중 폴더 이름이 "__"로 시작하는 경우 자동 지정
             foreach (string assetPath in importedAssets)
             {
-                // 에셋이 Addressable 경로에 있는지 확인
-                if (!assetPath.Contains(C.Asset.kAddressableAssetPath))
-                    continue;
-
                 // 에셋 경로의 상위 폴더 이름 확인
                 string directory = Path.GetDirectoryName(assetPath);
                 if (string.IsNullOrEmpty(directory))

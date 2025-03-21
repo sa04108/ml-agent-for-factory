@@ -15,33 +15,8 @@ MonoBehaviour:
   m_GroupName: DefaultGroup
   m_GUID: 988add5c52899164a8f285ae8b9299f6
   m_SerializeEntries:
-  - m_GUID: 0c3aff987d403ee4483c6663a8ee6c4d
-    m_Address: Assets/AddressableAssets/__Fire_Alarm
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 15ea2bdf3994b2045b78353dcbaa42f0
-    m_Address: Assets/AddressableAssets/__Door_Large
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 618052dbba9a4bb499d4740de09b552d
-    m_Address: Assets/AddressableAssets/__Medkit
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6250b14fff1a8ef4aa57b81864d967b1
-    m_Address: Assets/AddressableAssets/__Fire_Closet
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: be6c8030bef7fea4288e4d3d03c2c2ed
-    m_Address: Assets/AddressableAssets/__Door
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f02f0c53c078d854190519649badc062
-    m_Address: Assets/AddressableAssets/__Fire_Extinguisher
+  - m_GUID: 55bd12522b3629f438849920a955a1aa
+    m_Address: Assets/AddressableAssets/__Sofa
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

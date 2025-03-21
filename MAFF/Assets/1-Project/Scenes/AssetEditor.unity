@@ -1178,37 +1178,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6260dbc8baabfdd45a58392cfb843f9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assets:
-  - m_AssetGUID: c5a8c280a38e5f44fa40dbb19068142e
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  - m_AssetGUID: 622d27435be179a46a71f3838c62a961
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  - m_AssetGUID: 7e3611a56e78fc247994c090f8795cb2
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  - m_AssetGUID: 3c1c1cf2af570864bb4d9ee692c4989b
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  - m_AssetGUID: cf81d94c328b77a4494785a27f7166bf
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  - m_AssetGUID: 08ccaa42ceb4219459d71dd95dd30f58
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
+  keys:
+  - Assets/AddressableAssets/__Sofa/Sofa.prefab
   assetParent: {fileID: 765012900}
   buttonParent: {fileID: 520873659}
   buttonPreset: {fileID: 1713079429}

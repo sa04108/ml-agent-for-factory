@@ -1,5 +1,5 @@
+using System.Linq;
 using TMPro;
-using UniRx;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.EventSystems;
@@ -13,7 +13,7 @@ namespace Merlin
 
         [Header("Links")]
         [SerializeField]
-        private AssetReference[] assets;
+        private string[] keys;
 
         [SerializeField]
         private Transform assetParent;
@@ -35,11 +35,11 @@ namespace Merlin
         {
             modifier = GetComponent<AssetModifier>();
 
-            for (int i = 0; i < assets.Length; i++)
+            for (int i = 0; i < keys.Length; i++)
             {
                 int c_i = i;
-                CreateButton($"Instantiate {assets[i].RuntimeKey}")
-                    .onClick.AddListener(() => DownloadAndInstantiate(assets[c_i]));
+                CreateButton($"Instantiate {keys[i].Split('/').LastOrDefault()}")
+                    .onClick.AddListener(() => DownloadAndInstantiate(keys[c_i]));
             }
 
             CreateButton($"Check For Update")
@@ -93,35 +93,26 @@ namespace Merlin
             }
         }
 
-        private void DownloadAndInstantiate(AssetReference asset)
+        private void DownloadAndInstantiate(string key)
         {
             for (int i = assetParent.childCount - 1; i >= 0; i--)
             {
                 Destroy(assetParent.GetChild(i).gameObject);
             }
 
-            Addressables.GetDownloadSizeAsync(asset)
+            Addressables.GetDownloadSizeAsync(key)
                 .Completed += handle =>
                 {
                     if (handle.Result > 0)
                     {
-                        MessageBox.Show(
-                            $"Total Download Size: {handle.Result}\n" +
-                            "Do you want to download?",
-                            eMessageBoxButtons.YesNo)
-                        .Subscribe(result =>
-                        {
-                            if (result.Code == eMessageBoxResult.Yes)
-                            {
-                                Addressables.DownloadDependenciesAsync(asset)
-                                .Completed += _ => Addressables.InstantiateAsync(asset, assetParent)
-                                .Completed += handle => modifier.SetFbxInstance(handle.Result);
-                            }
-                        });
+                        Debug.Log($"Download size for this: {handle.Result}");
+                        Addressables.DownloadDependenciesAsync(key)
+                            .Completed += _ => Addressables.InstantiateAsync(key, assetParent)
+                            .Completed += handle => modifier.SetFbxInstance(handle.Result);
                     }
                     else
                     {
-                        Addressables.InstantiateAsync(asset, assetParent)
+                        Addressables.InstantiateAsync(key, assetParent)
                         .Completed += handle => modifier.SetFbxInstance(handle.Result);
                     }
                 };
@@ -134,52 +125,30 @@ namespace Merlin
             {
                 if (handle.Result.Count > 0)
                 {
-                    MessageBox.Show(
-                        "Asset Update Available.\n" +
-                        "Do you want to check for download?",
-                        eMessageBoxButtons.YesNo)
-                    .Subscribe(result =>
-                    {
-                        if (result.Code == eMessageBoxResult.Yes)
-                        {
-                            Addressables.UpdateCatalogs(handle.Result)
-                            .Completed += _ => CheckForDownload();
-                        }
-                    });
+                    Debug.Log("Catalog Updated");
+                    Addressables.UpdateCatalogs(handle.Result)
+                    .Completed += _ => CheckForDownload();
                 }
                 else
                 {
-                    MessageBox.Show(
-                        "Asset is the latest version.",
-                        eMessageBoxButtons.OK);
+                    Debug.Log("Catalog is the latest version");
                 }
             };
         }
 
         private void CheckForDownload()
         {
-            Addressables.GetDownloadSizeAsync(assets)
+            Addressables.GetDownloadSizeAsync(keys)
             .Completed += handle =>
             {
                 if (handle.Result > 0)
                 {
-                    MessageBox.Show(
-                        $"Total Download Size: {handle.Result}\n" +
-                        "Do you want to download?",
-                        eMessageBoxButtons.YesNo)
-                    .Subscribe(result =>
-                    {
-                        if (result.Code == eMessageBoxResult.Yes)
-                        {
-                            Addressables.DownloadDependenciesAsync(assets, Addressables.MergeMode.Union);
-                        }
-                    });
+                    Debug.Log($"Total Download Size: {handle.Result}");
+                    Addressables.DownloadDependenciesAsync(keys, Addressables.MergeMode.Union);
                 }
                 else
                 {
-                    MessageBox.Show(
-                        "All asset downloaded for current version",
-                        eMessageBoxButtons.OK);
+                    Debug.Log("All asset is the latest version");
                 }
             };
         }
@@ -187,7 +156,7 @@ namespace Merlin
         private Button CreateButton(string text)
         {
             var button = Instantiate(buttonPreset, buttonParent);
-            button.SetActive(true);
+            button.gameObject.SetActive(true);
             button.GetComponentInChildren<TMP_Text>().text = text;
 
             return button;
