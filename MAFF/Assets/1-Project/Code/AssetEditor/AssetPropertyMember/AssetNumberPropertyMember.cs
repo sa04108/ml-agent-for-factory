@@ -1,4 +1,4 @@
-﻿using TMPro;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,7 +27,7 @@ namespace Merlin
                 }
                 else if (type == MaterialPropertyType.Int)
                 {
-                    mat.SetInt(title.text, (int)value);
+                    mat.SetInteger(title.text, (int)value);
                 }
             }
         }
@@ -42,9 +42,9 @@ namespace Merlin
         {
             this.mat = mat;
             this.type = type;
-            title.text = name;
+            title.text = $"{name}, [{type}]";
             currentValue = value;
-            inputField.text = value.ToString();
+            inputField.SetTextWithoutNotify(value.ToString());
 
             if (type == MaterialPropertyType.Int)
                 slider.wholeNumbers = true;
@@ -58,9 +58,9 @@ namespace Merlin
         {
             this.mat = mat;
             this.type = type;
-            title.text = name;
+            title.text = $"{name}, [{type}]";
             currentValue = value;
-            inputField.text = value.ToString();
+            inputField.SetTextWithoutNotify(value.ToString());
 
             slider.gameObject.SetActive(false);
         }
@@ -70,14 +70,18 @@ namespace Merlin
             if (type == MaterialPropertyType.Float &&
                 float.TryParse(value, out float fResult))
             {
+                fResult = Mathf.Clamp(fResult, slider.minValue, slider.maxValue);
                 CurrentValue = fResult;
-                slider.SetValueWithoutNotify(currentValue);
+                inputField.SetTextWithoutNotify(CurrentValue.ToString());
+                slider.SetValueWithoutNotify(CurrentValue);
             }
             else if (type == MaterialPropertyType.Int &&
                 int.TryParse(value, out int iResult))
             {
+                iResult = Mathf.Clamp(iResult, (int)slider.minValue, (int)slider.maxValue);
                 CurrentValue = iResult;
-                slider.SetValueWithoutNotify(currentValue);
+                inputField.SetTextWithoutNotify(CurrentValue.ToString());
+                slider.SetValueWithoutNotify(CurrentValue);
             }
             else // 빈 값 입력 포함
             {
@@ -87,8 +91,8 @@ namespace Merlin
 
         public void OnSliderValueChanged(float value)
         {
-            CurrentValue = slider.value;
-            inputField.SetTextWithoutNotify(currentValue.ToString());
+            CurrentValue = value;
+            inputField.SetTextWithoutNotify(CurrentValue.ToString());
         }
     }
 }

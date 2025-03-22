@@ -1,8 +1,13 @@
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Merlin
 {
+    // Shader Name -> Property Name -> Property Type -> Property Value
+    using ShaderProperty = Dictionary<string, Dictionary<string, Dictionary<string, object>>>;
+
     public class AssetModifier : MonoBehaviour
     {
         [SerializeField]
@@ -14,9 +19,14 @@ namespace Merlin
         private int presetCount;
         private GameObject assetInstance;
 
+        [SerializeField]
+        private TextAsset shaderPropJson;
+        private ShaderProperty shaderProps;
+
         private void Start()
         {
             presetCount = memberParent.transform.childCount;
+            shaderProps = JsonConvert.DeserializeObject<ShaderProperty>(shaderPropJson.text);
         }
 
         public void SetFbxInstance(GameObject go)
@@ -34,71 +44,76 @@ namespace Merlin
 
             foreach (Renderer renderer in renderers)
             {
-                var mat = renderer.sharedMaterial;
-                var matHash = mat.GetHashCode();
-
-                if (materialSet.Contains(matHash))
-                    continue;
-                materialSet.Add(matHash);
-
-#if UNITY_EDITOR
-                Dictionary<string, int> shaderProps = new();
-                int propCount = UnityEditor.ShaderUtil.GetPropertyCount(mat.shader);
-                for (int i = 0; i < propCount; i++)
+                foreach (Material mat in renderer.sharedMaterials)
                 {
-                    shaderProps.Add(UnityEditor.ShaderUtil.GetPropertyName(mat.shader, i), i);
-                }
-#endif
+                    var matHash = mat.GetHashCode();
 
-                var mainTex = mat.mainTexture as Texture2D;
-                if (mainTex == null)
-                    continue;
-
-                var mainSprite = TextureToSprite(mainTex);
-                var group = memberCreator.CreateGroupMember(mainSprite, "Material", mat.name, memberParent);
-
-                var floatProps = mat.GetPropertyNames(MaterialPropertyType.Float);
-                foreach (string prop in floatProps)
-                {
-                    var value = mat.GetFloat(prop);
-#if UNITY_EDITOR
-                    if (UnityEditor.ShaderUtil.GetPropertyType(mat.shader, shaderProps[prop]) == UnityEditor.ShaderUtil.ShaderPropertyType.Range)
-                    {
-                        float min = UnityEditor.ShaderUtil.GetRangeLimits(mat.shader, shaderProps[prop], 1);
-                        float max = UnityEditor.ShaderUtil.GetRangeLimits(mat.shader, shaderProps[prop], 2);
-                        memberCreator.CreateFloatMember(mat, prop, value, min, max, group);
-                    }
-                    else
-                    {
-                        memberCreator.CreateFloatMember(mat, prop, value, group);
-                    }
-#else
-                    memberCreator.CreateFloatMember(mat, prop, value, -2, 2, group);
-#endif
-                }
-
-                var textureProps = mat.GetTexturePropertyNames();
-                foreach (string prop in textureProps)
-                {
-                    var texture = mat.GetTexture(prop) as Texture2D;
-                    if (texture == null)
+                    if (materialSet.Contains(matHash))
                         continue;
+                    materialSet.Add(matHash);
 
-                    var sprite = TextureToSprite(texture);
-                    memberCreator.CreateGroupMember(sprite, "Texture", renderer.name, group);
+                    var group = memberCreator.CreateGroupMember(mat.mainTexture, "Material", mat.name, memberParent);
+
+                    var floatProps = mat.GetPropertyNames(MaterialPropertyType.Float);
+                    foreach (string prop in floatProps)
+                    {
+                        var value = mat.GetFloat(prop);
+                        if (shaderProps.ContainsKey(mat.shader.name) &&
+                            shaderProps[mat.shader.name].ContainsKey(prop) &&
+                            shaderProps[mat.shader.name][prop].ContainsKey("Range"))
+                        {
+                            Dictionary<string, float> rangeDict = GetShaderPropertyValue<float>(mat.shader.name, prop, "Range");
+                            float min = rangeDict["Min"];
+                            float max = rangeDict["Max"];
+                            memberCreator.CreateFloatMember(mat, prop, value, min, max, group);
+                        }
+                        else
+                        {
+                            memberCreator.CreateFloatMember(mat, prop, value, group);
+                        }
+                    }
+
+                    var intProps = mat.GetPropertyNames(MaterialPropertyType.Int);
+                    foreach (string prop in intProps)
+                    {
+                        var value = mat.GetInteger(prop);
+                        memberCreator.CreateIntMember(mat, prop, value, group);
+                    }
+
+                    var vecProps = mat.GetPropertyNames(MaterialPropertyType.Vector);
+                    foreach (string prop in vecProps)
+                    {
+                        var value = mat.GetVector(prop);
+                        if (shaderProps.ContainsKey(mat.shader.name) &&
+                            shaderProps[mat.shader.name].ContainsKey(prop) &&
+                            shaderProps[mat.shader.name][prop].ContainsKey("Color"))
+                        {
+                            memberCreator.CreateVectorMember(mat, prop, value, true, group);
+                        }
+                        else
+                        {
+                            memberCreator.CreateVectorMember(mat, prop, value, false, group);
+                        }
+                    }
+
+                    var matrixProps = mat.GetPropertyNames(MaterialPropertyType.Matrix);
+                    foreach (string prop in matrixProps)
+                    {
+                        var value = mat.GetMatrix(prop);
+                        memberCreator.CreateMatrixMember(mat, prop, value, group);
+                    }
+
+                    var textureProps = mat.GetTexturePropertyNames();
+                    foreach (string prop in textureProps)
+                    {
+                        var tex = mat.GetTexture(prop);
+                        if (tex == null)
+                            continue;
+
+                        memberCreator.CreateGroupMember(tex, "Texture", renderer.name, group);
+                    }
                 }
             }
-        }
-
-        private Sprite TextureToSprite(Texture2D texture)
-        {
-            Sprite sprite = Sprite.Create(
-                texture,
-                new Rect(0, 0, texture.width, texture.height),
-                new Vector2(0.5f, 0.5f)
-            );
-
-            return sprite;
         }
 
         private void ClearMembers()
@@ -107,6 +122,11 @@ namespace Merlin
             {
                 Destroy(memberParent.GetChild(i).gameObject);
             }
+        }
+
+        private Dictionary<string, T> GetShaderPropertyValue<T>(string shaderName, string propName, string propType)
+        {
+            return ((JObject)shaderProps[shaderName][propName][propType]).ToObject<Dictionary<string, T>>();
         }
     }
 }

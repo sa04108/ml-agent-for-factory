@@ -1,0 +1,2446 @@
+{
+  "Custom/Test Shader": {
+    "_Color": {
+      "Color": {}
+    },
+    "_Glossiness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Metallic": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    }
+  },
+  "Hidden/LookDev/Compositor": {
+    "_ShadowColor0": {
+      "Color": {}
+    },
+    "_ShadowColor1": {
+      "Color": {}
+    },
+    "_FirstViewColor": {
+      "Color": {}
+    },
+    "_SecondViewColor": {
+      "Color": {}
+    }
+  },
+  "Hidden/Shadow2DShadowSprite": {
+    "_Color": {
+      "Color": {}
+    }
+  },
+  "Hidden/Shadow2DUnshadowSprite": {
+    "_Color": {
+      "Color": {}
+    }
+  },
+  "Hidden/Sirenix/Editor/ExtractSprite": {
+    "_Color": {
+      "Color": {}
+    }
+  },
+  "Hidden/Sirenix/Editor/GUIIcon": {
+    "_Color": {
+      "Color": {}
+    }
+  },
+  "Hidden/TerrainEngine/Details/UniversalPipeline/BillboardWavingDoublePass": {
+    "_WavingTint": {
+      "Color": {}
+    }
+  },
+  "Hidden/TerrainEngine/Details/UniversalPipeline/WavingDoublePass": {
+    "_WavingTint": {
+      "Color": {}
+    }
+  },
+  "Hidden/TMP/Internal/Editor/Distance Field SSD": {
+    "_FaceColor": {
+      "Color": {}
+    },
+    "_FaceDilate": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_OutlineColor": {
+      "Color": {}
+    },
+    "_OutlineWidth": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_OutlineSoftness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_UnderlayColor": {
+      "Color": {}
+    },
+    "_UnderlayOffsetX": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_UnderlayOffsetY": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_UnderlayDilate": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_UnderlaySoftness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_PerspectiveFilter": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Sharpness": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    }
+  },
+  "Hidden/Universal Render Pipeline/BRGPicking": {
+    "_BaseColor": {
+      "Color": {}
+    },
+    "_Cutoff": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    }
+  },
+  "Hidden/Universal Render Pipeline/Terrain/Lit (Add Pass)": {
+    "_Metallic0": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Metallic1": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Metallic2": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Metallic3": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Smoothness0": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Smoothness1": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Smoothness2": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Smoothness3": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_BaseColor": {
+      "Color": {}
+    }
+  },
+  "Hidden/Universal Render Pipeline/Terrain/Lit (Base Pass)": {
+    "_BaseColor": {
+      "Color": {}
+    }
+  },
+  "Hidden/Universal Render Pipeline/Terrain/Lit (Basemap Gen)": {
+    "_Metallic0": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Metallic1": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Metallic2": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Metallic3": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Smoothness0": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Smoothness1": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Smoothness2": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Smoothness3": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    }
+  },
+  "Hidden/UnlitTransparentColored": {
+    "_Color": {
+      "Color": {}
+    }
+  },
+  "Shader Graphs/ArnoldStandardSurface": {
+    "_BASE_COLOR": {
+      "Color": {}
+    },
+    "_SPECULAR_COLOR": {
+      "Color": {}
+    },
+    "_EMISSION_COLOR": {
+      "Color": {}
+    }
+  },
+  "Shader Graphs/ArnoldStandardSurfaceTransparent": {
+    "_BASE_COLOR": {
+      "Color": {}
+    },
+    "_SPECULAR_COLOR": {
+      "Color": {}
+    },
+    "_EMISSION_COLOR": {
+      "Color": {}
+    },
+    "_OPACITY": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    }
+  },
+  "Shader Graphs/BlendAndLit": {
+    "_Color": {
+      "Color": {}
+    }
+  },
+  "Shader Graphs/Decal": {
+    "_DrawOrder": {
+      "Range": {
+        "Min": -50.0,
+        "Max": 50.0
+      }
+    }
+  },
+  "Shader Graphs/PhysicalMaterial3DsMax": {
+    "_BASE_COLOR_WEIGHT": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_BASE_COLOR": {
+      "Color": {}
+    },
+    "_REFLECTIONS_COLOR": {
+      "Color": {}
+    },
+    "_REFLECTIONS_ROUGHNESS": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_METALNESS": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_REFLECTIONS_IOR": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 50.0
+      }
+    },
+    "_TRANSPARENCY": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_EMISSION_WEIGHT": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_EMISSION_COLOR": {
+      "Color": {}
+    },
+    "_BUMP_MAP_STRENGTH": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 10.0
+      }
+    }
+  },
+  "Shader Graphs/PhysicalMaterial3DsMaxTransparent": {
+    "_BASE_COLOR_WEIGHT": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_BASE_COLOR": {
+      "Color": {}
+    },
+    "_REFLECTIONS_COLOR": {
+      "Color": {}
+    },
+    "_REFLECTIONS_ROUGHNESS": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_METALNESS": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_REFLECTIONS_IOR": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 50.0
+      }
+    },
+    "_TRANSPARENCY": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_EMISSION_WEIGHT": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_EMISSION_COLOR": {
+      "Color": {}
+    },
+    "_BUMP_MAP_STRENGTH": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 10.0
+      }
+    }
+  },
+  "TextMeshPro/Bitmap": {
+    "_FaceColor": {
+      "Color": {}
+    }
+  },
+  "TextMeshPro/Bitmap Custom Atlas": {
+    "_FaceColor": {
+      "Color": {}
+    }
+  },
+  "TextMeshPro/Distance Field": {
+    "_FaceUVSpeedX": {
+      "Range": {
+        "Min": -5.0,
+        "Max": 5.0
+      }
+    },
+    "_FaceUVSpeedY": {
+      "Range": {
+        "Min": -5.0,
+        "Max": 5.0
+      }
+    },
+    "_FaceColor": {
+      "Color": {}
+    },
+    "_FaceDilate": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_OutlineColor": {
+      "Color": {}
+    },
+    "_OutlineUVSpeedX": {
+      "Range": {
+        "Min": -5.0,
+        "Max": 5.0
+      }
+    },
+    "_OutlineUVSpeedY": {
+      "Range": {
+        "Min": -5.0,
+        "Max": 5.0
+      }
+    },
+    "_OutlineWidth": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_OutlineSoftness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Bevel": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_BevelOffset": {
+      "Range": {
+        "Min": -0.5,
+        "Max": 0.5
+      }
+    },
+    "_BevelWidth": {
+      "Range": {
+        "Min": -0.5,
+        "Max": 0.5
+      }
+    },
+    "_BevelClamp": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_BevelRoundness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_LightAngle": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 6.28318548
+      }
+    },
+    "_SpecularColor": {
+      "Color": {}
+    },
+    "_SpecularPower": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 4.0
+      }
+    },
+    "_Reflectivity": {
+      "Range": {
+        "Min": 5.0,
+        "Max": 15.0
+      }
+    },
+    "_Diffuse": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Ambient": {
+      "Range": {
+        "Min": 1.0,
+        "Max": 0.0
+      }
+    },
+    "_BumpOutline": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_BumpFace": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_ReflectFaceColor": {
+      "Color": {}
+    },
+    "_ReflectOutlineColor": {
+      "Color": {}
+    },
+    "_UnderlayColor": {
+      "Color": {}
+    },
+    "_UnderlayOffsetX": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_UnderlayOffsetY": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_UnderlayDilate": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_UnderlaySoftness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_GlowColor": {
+      "Color": {}
+    },
+    "_GlowOffset": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_GlowInner": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_GlowOuter": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_GlowPower": {
+      "Range": {
+        "Min": 1.0,
+        "Max": 0.0
+      }
+    },
+    "_PerspectiveFilter": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Sharpness": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    }
+  },
+  "TextMeshPro/Distance Field (Surface)": {
+    "_FaceUVSpeedX": {
+      "Range": {
+        "Min": -5.0,
+        "Max": 5.0
+      }
+    },
+    "_FaceUVSpeedY": {
+      "Range": {
+        "Min": -5.0,
+        "Max": 5.0
+      }
+    },
+    "_FaceColor": {
+      "Color": {}
+    },
+    "_FaceDilate": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_OutlineColor": {
+      "Color": {}
+    },
+    "_OutlineUVSpeedX": {
+      "Range": {
+        "Min": -5.0,
+        "Max": 5.0
+      }
+    },
+    "_OutlineUVSpeedY": {
+      "Range": {
+        "Min": -5.0,
+        "Max": 5.0
+      }
+    },
+    "_OutlineWidth": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_OutlineSoftness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Bevel": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_BevelOffset": {
+      "Range": {
+        "Min": -0.5,
+        "Max": 0.5
+      }
+    },
+    "_BevelWidth": {
+      "Range": {
+        "Min": -0.5,
+        "Max": 0.5
+      }
+    },
+    "_BevelClamp": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_BevelRoundness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_BumpOutline": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_BumpFace": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_ReflectFaceColor": {
+      "Color": {}
+    },
+    "_ReflectOutlineColor": {
+      "Color": {}
+    },
+    "_SpecColor": {
+      "Color": {}
+    },
+    "_FaceShininess": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_OutlineShininess": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_GlowColor": {
+      "Color": {}
+    },
+    "_GlowOffset": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_GlowInner": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_GlowOuter": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_GlowPower": {
+      "Range": {
+        "Min": 1.0,
+        "Max": 0.0
+      }
+    },
+    "_PerspectiveFilter": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Sharpness": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    }
+  },
+  "TextMeshPro/Distance Field Overlay": {
+    "_FaceUVSpeedX": {
+      "Range": {
+        "Min": -5.0,
+        "Max": 5.0
+      }
+    },
+    "_FaceUVSpeedY": {
+      "Range": {
+        "Min": -5.0,
+        "Max": 5.0
+      }
+    },
+    "_FaceColor": {
+      "Color": {}
+    },
+    "_FaceDilate": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_OutlineColor": {
+      "Color": {}
+    },
+    "_OutlineUVSpeedX": {
+      "Range": {
+        "Min": -5.0,
+        "Max": 5.0
+      }
+    },
+    "_OutlineUVSpeedY": {
+      "Range": {
+        "Min": -5.0,
+        "Max": 5.0
+      }
+    },
+    "_OutlineWidth": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_OutlineSoftness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Bevel": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_BevelOffset": {
+      "Range": {
+        "Min": -0.5,
+        "Max": 0.5
+      }
+    },
+    "_BevelWidth": {
+      "Range": {
+        "Min": -0.5,
+        "Max": 0.5
+      }
+    },
+    "_BevelClamp": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_BevelRoundness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_LightAngle": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 6.28318548
+      }
+    },
+    "_SpecularColor": {
+      "Color": {}
+    },
+    "_SpecularPower": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 4.0
+      }
+    },
+    "_Reflectivity": {
+      "Range": {
+        "Min": 5.0,
+        "Max": 15.0
+      }
+    },
+    "_Diffuse": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Ambient": {
+      "Range": {
+        "Min": 1.0,
+        "Max": 0.0
+      }
+    },
+    "_BumpOutline": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_BumpFace": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_ReflectFaceColor": {
+      "Color": {}
+    },
+    "_ReflectOutlineColor": {
+      "Color": {}
+    },
+    "_UnderlayColor": {
+      "Color": {}
+    },
+    "_UnderlayOffsetX": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_UnderlayOffsetY": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_UnderlayDilate": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_UnderlaySoftness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_GlowColor": {
+      "Color": {}
+    },
+    "_GlowOffset": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_GlowInner": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_GlowOuter": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_GlowPower": {
+      "Range": {
+        "Min": 1.0,
+        "Max": 0.0
+      }
+    },
+    "_PerspectiveFilter": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Sharpness": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    }
+  },
+  "TextMeshPro/Distance Field SSD": {
+    "_FaceUVSpeedX": {
+      "Range": {
+        "Min": -5.0,
+        "Max": 5.0
+      }
+    },
+    "_FaceUVSpeedY": {
+      "Range": {
+        "Min": -5.0,
+        "Max": 5.0
+      }
+    },
+    "_FaceColor": {
+      "Color": {}
+    },
+    "_FaceDilate": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_OutlineColor": {
+      "Color": {}
+    },
+    "_OutlineUVSpeedX": {
+      "Range": {
+        "Min": -5.0,
+        "Max": 5.0
+      }
+    },
+    "_OutlineUVSpeedY": {
+      "Range": {
+        "Min": -5.0,
+        "Max": 5.0
+      }
+    },
+    "_OutlineWidth": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_OutlineSoftness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Bevel": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_BevelOffset": {
+      "Range": {
+        "Min": -0.5,
+        "Max": 0.5
+      }
+    },
+    "_BevelWidth": {
+      "Range": {
+        "Min": -0.5,
+        "Max": 0.5
+      }
+    },
+    "_BevelClamp": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_BevelRoundness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_LightAngle": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 6.28318548
+      }
+    },
+    "_SpecularColor": {
+      "Color": {}
+    },
+    "_SpecularPower": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 4.0
+      }
+    },
+    "_Reflectivity": {
+      "Range": {
+        "Min": 5.0,
+        "Max": 15.0
+      }
+    },
+    "_Diffuse": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Ambient": {
+      "Range": {
+        "Min": 1.0,
+        "Max": 0.0
+      }
+    },
+    "_BumpOutline": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_BumpFace": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_ReflectFaceColor": {
+      "Color": {}
+    },
+    "_ReflectOutlineColor": {
+      "Color": {}
+    },
+    "_UnderlayColor": {
+      "Color": {}
+    },
+    "_UnderlayOffsetX": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_UnderlayOffsetY": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_UnderlayDilate": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_UnderlaySoftness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_GlowColor": {
+      "Color": {}
+    },
+    "_GlowOffset": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_GlowInner": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_GlowOuter": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_GlowPower": {
+      "Range": {
+        "Min": 1.0,
+        "Max": 0.0
+      }
+    },
+    "_PerspectiveFilter": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Sharpness": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    }
+  },
+  "TextMeshPro/Mobile/Bitmap": {
+    "_Color": {
+      "Color": {}
+    },
+    "_DiffusePower": {
+      "Range": {
+        "Min": 1.0,
+        "Max": 4.0
+      }
+    }
+  },
+  "TextMeshPro/Mobile/Distance Field": {
+    "_FaceColor": {
+      "Color": {}
+    },
+    "_FaceDilate": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_OutlineColor": {
+      "Color": {}
+    },
+    "_OutlineWidth": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_OutlineSoftness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_UnderlayColor": {
+      "Color": {}
+    },
+    "_UnderlayOffsetX": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_UnderlayOffsetY": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_UnderlayDilate": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_UnderlaySoftness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_PerspectiveFilter": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Sharpness": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    }
+  },
+  "TextMeshPro/Mobile/Distance Field - 2 Pass": {
+    "_FaceColor": {
+      "Color": {}
+    },
+    "_FaceDilate": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_OutlineColor": {
+      "Color": {}
+    },
+    "_OutlineWidth": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_OutlineSoftness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_UnderlayColor": {
+      "Color": {}
+    },
+    "_UnderlayOffsetX": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_UnderlayOffsetY": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_UnderlayDilate": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_UnderlaySoftness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_PerspectiveFilter": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Sharpness": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    }
+  },
+  "TextMeshPro/Mobile/Distance Field - Masking": {
+    "_FaceColor": {
+      "Color": {}
+    },
+    "_FaceDilate": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_OutlineColor": {
+      "Color": {}
+    },
+    "_OutlineWidth": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_OutlineSoftness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_UnderlayColor": {
+      "Color": {}
+    },
+    "_UnderlayOffsetX": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_UnderlayOffsetY": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_UnderlayDilate": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_UnderlaySoftness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_PerspectiveFilter": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Sharpness": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_MaskEdgeColor": {
+      "Color": {}
+    },
+    "_MaskEdgeSoftness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_MaskWipeControl": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    }
+  },
+  "TextMeshPro/Mobile/Distance Field (Surface)": {
+    "_FaceColor": {
+      "Color": {}
+    },
+    "_FaceDilate": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_OutlineColor": {
+      "Color": {}
+    },
+    "_OutlineWidth": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_OutlineSoftness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_GlowColor": {
+      "Color": {}
+    },
+    "_GlowOffset": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_GlowInner": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_GlowOuter": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_GlowPower": {
+      "Range": {
+        "Min": 1.0,
+        "Max": 0.0
+      }
+    },
+    "_PerspectiveFilter": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Sharpness": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    }
+  },
+  "TextMeshPro/Mobile/Distance Field Overlay": {
+    "_FaceColor": {
+      "Color": {}
+    },
+    "_FaceDilate": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_OutlineColor": {
+      "Color": {}
+    },
+    "_OutlineWidth": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_OutlineSoftness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_UnderlayColor": {
+      "Color": {}
+    },
+    "_UnderlayOffsetX": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_UnderlayOffsetY": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_UnderlayDilate": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_UnderlaySoftness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_PerspectiveFilter": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Sharpness": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    }
+  },
+  "TextMeshPro/Mobile/Distance Field SSD": {
+    "_FaceColor": {
+      "Color": {}
+    },
+    "_FaceDilate": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_OutlineColor": {
+      "Color": {}
+    },
+    "_OutlineWidth": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_OutlineSoftness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_UnderlayColor": {
+      "Color": {}
+    },
+    "_UnderlayOffsetX": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_UnderlayOffsetY": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_UnderlayDilate": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_UnderlaySoftness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_PerspectiveFilter": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Sharpness": {
+      "Range": {
+        "Min": -1.0,
+        "Max": 1.0
+      }
+    },
+    "_MaskEdgeColor": {
+      "Color": {}
+    },
+    "_MaskEdgeSoftness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_MaskWipeControl": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    }
+  },
+  "TextMeshPro/Sprite": {
+    "_Color": {
+      "Color": {}
+    }
+  },
+  "TextMeshPro/SRP/TMP_SDF-HDRP LIT": {
+    "_FaceColor": {
+      "Color": {}
+    },
+    "_OutlineColor1": {
+      "Color": {}
+    },
+    "_OutlineColor2": {
+      "Color": {}
+    },
+    "_OutlineColor3": {
+      "Color": {}
+    },
+    "_UnderlayColor": {
+      "Color": {}
+    },
+    "_BevelAmount": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_BevelOffset": {
+      "Range": {
+        "Min": -0.5,
+        "Max": 0.5
+      }
+    },
+    "_BevelWidth": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 0.5
+      }
+    },
+    "_BevelRoundness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_BevelClamp": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_SpecularColor": {
+      "Color": {}
+    },
+    "_LightAngle": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 6.28
+      }
+    },
+    "_SpecularPower": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 4.0
+      }
+    },
+    "_Reflectivity": {
+      "Range": {
+        "Min": 5.0,
+        "Max": 15.0
+      }
+    },
+    "_Diffuse": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Ambient": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    }
+  },
+  "TextMeshPro/SRP/TMP_SDF-HDRP UNLIT": {
+    "_FaceColor": {
+      "Color": {}
+    },
+    "_OutlineColor1": {
+      "Color": {}
+    },
+    "_OutlineColor2": {
+      "Color": {}
+    },
+    "_OutlineColor3": {
+      "Color": {}
+    },
+    "_UnderlayColor": {
+      "Color": {}
+    },
+    "_BevelAmount": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_BevelOffset": {
+      "Range": {
+        "Min": -0.5,
+        "Max": 0.5
+      }
+    },
+    "_BevelWidth": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 0.5
+      }
+    },
+    "_BevelRoundness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_BevelClamp": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_SpecularColor": {
+      "Color": {}
+    },
+    "_LightAngle": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 6.28
+      }
+    },
+    "_SpecularPower": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 4.0
+      }
+    },
+    "_Reflectivity": {
+      "Range": {
+        "Min": 5.0,
+        "Max": 15.0
+      }
+    },
+    "_Diffuse": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Ambient": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    }
+  },
+  "TextMeshPro/SRP/TMP_SDF-URP Lit": {
+    "_FaceColor": {
+      "Color": {}
+    },
+    "_OutlineColor1": {
+      "Color": {}
+    },
+    "_OutlineColor2": {
+      "Color": {}
+    },
+    "_OutlineColor3": {
+      "Color": {}
+    },
+    "_UnderlayColor": {
+      "Color": {}
+    },
+    "_BevelAmount": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_BevelOffset": {
+      "Range": {
+        "Min": -0.5,
+        "Max": 0.5
+      }
+    },
+    "_BevelWidth": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 0.5
+      }
+    },
+    "_BevelRoundness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_BevelClamp": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_SpecularColor": {
+      "Color": {}
+    },
+    "_LightAngle": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 6.28
+      }
+    },
+    "_SpecularPower": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 4.0
+      }
+    },
+    "_Reflectivity": {
+      "Range": {
+        "Min": 5.0,
+        "Max": 15.0
+      }
+    },
+    "_Diffuse": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Ambient": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    }
+  },
+  "TextMeshPro/SRP/TMP_SDF-URP Unlit": {
+    "_FaceColor": {
+      "Color": {}
+    },
+    "_OutlineColor1": {
+      "Color": {}
+    },
+    "_OutlineColor2": {
+      "Color": {}
+    },
+    "_OutlineColor3": {
+      "Color": {}
+    },
+    "_UnderlayColor": {
+      "Color": {}
+    },
+    "_BevelAmount": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_BevelOffset": {
+      "Range": {
+        "Min": -0.5,
+        "Max": 0.5
+      }
+    },
+    "_BevelWidth": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 0.5
+      }
+    },
+    "_BevelRoundness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_BevelClamp": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_SpecularColor": {
+      "Color": {}
+    },
+    "_LightAngle": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 6.28
+      }
+    },
+    "_SpecularPower": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 4.0
+      }
+    },
+    "_Reflectivity": {
+      "Range": {
+        "Min": 5.0,
+        "Max": 15.0
+      }
+    },
+    "_Diffuse": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Ambient": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    }
+  },
+  "Universal Render Pipeline/2D/Sprite-Lit-Default": {
+    "_Color": {
+      "Color": {}
+    },
+    "_RendererColor": {
+      "Color": {}
+    }
+  },
+  "Universal Render Pipeline/2D/Sprite-Mask": {
+    "_Cutoff": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    }
+  },
+  "Universal Render Pipeline/2D/Sprite-Unlit-Default": {
+    "_Color": {
+      "Color": {}
+    },
+    "_RendererColor": {
+      "Color": {}
+    }
+  },
+  "Universal Render Pipeline/Autodesk Interactive/AutodeskInteractive": {
+    "_Color": {
+      "Color": {}
+    },
+    "_EmissionColor": {
+      "Color": {}
+    }
+  },
+  "Universal Render Pipeline/Autodesk Interactive/AutodeskInteractiveMasked": {
+    "_Color": {
+      "Color": {}
+    },
+    "_EmissionColor": {
+      "Color": {}
+    }
+  },
+  "Universal Render Pipeline/Autodesk Interactive/AutodeskInteractiveTransparent": {
+    "_Color": {
+      "Color": {}
+    },
+    "_EmissionColor": {
+      "Color": {}
+    }
+  },
+  "Universal Render Pipeline/Baked Lit": {
+    "_BaseColor": {
+      "Color": {}
+    },
+    "_Cutoff": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    }
+  },
+  "Universal Render Pipeline/Complex Lit": {
+    "_BaseColor": {
+      "Color": {}
+    },
+    "_Cutoff": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Smoothness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Metallic": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_SpecColor": {
+      "Color": {}
+    },
+    "_Parallax": {
+      "Range": {
+        "Min": 0.005,
+        "Max": 0.08
+      }
+    },
+    "_OcclusionStrength": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_EmissionColor": {
+      "Color": {}
+    },
+    "_DetailAlbedoMapScale": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 2.0
+      }
+    },
+    "_DetailNormalMapScale": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 2.0
+      }
+    },
+    "_ClearCoatMask": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_ClearCoatSmoothness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    }
+  },
+  "Universal Render Pipeline/Lit": {
+    "_BaseColor": {
+      "Color": {}
+    },
+    "_Cutoff": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Smoothness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Metallic": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_SpecColor": {
+      "Color": {}
+    },
+    "_Parallax": {
+      "Range": {
+        "Min": 0.005,
+        "Max": 0.08
+      }
+    },
+    "_OcclusionStrength": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_EmissionColor": {
+      "Color": {}
+    },
+    "_DetailAlbedoMapScale": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 2.0
+      }
+    },
+    "_DetailNormalMapScale": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 2.0
+      }
+    },
+    "_Color": {
+      "Color": {}
+    }
+  },
+  "Universal Render Pipeline/Nature/SpeedTree7": {
+    "_Color": {
+      "Color": {}
+    },
+    "_HueVariation": {
+      "Color": {}
+    },
+    "_Cutoff": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_WindQuality": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 5.0
+      }
+    }
+  },
+  "Universal Render Pipeline/Nature/SpeedTree7 Billboard": {
+    "_Color": {
+      "Color": {}
+    },
+    "_HueVariation": {
+      "Color": {}
+    },
+    "_Cutoff": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_WindQuality": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    }
+  },
+  "Universal Render Pipeline/Nature/SpeedTree8": {
+    "_Color": {
+      "Color": {}
+    },
+    "_HueVariationColor": {
+      "Color": {}
+    },
+    "_Glossiness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Metallic": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_SubsurfaceColor": {
+      "Color": {}
+    },
+    "_SubsurfaceIndirect": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_BillboardShadowFade": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_WindQuality": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 5.0
+      }
+    }
+  },
+  "Universal Render Pipeline/Nature/SpeedTree8_PBRLit": {
+    "_Color": {
+      "Color": {}
+    },
+    "_HueVariationColor": {
+      "Color": {}
+    },
+    "_Glossiness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Metallic": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_SubsurfaceIndirect": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_SubsurfaceColor": {
+      "Color": {}
+    },
+    "_AlphaClipThreshold": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    }
+  },
+  "Universal Render Pipeline/Nature/SpeedTree9_URP": {
+    "_Color": {
+      "Color": {}
+    },
+    "_HueVariationColor": {
+      "Color": {}
+    },
+    "_Glossiness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Metallic": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_SubsurfaceIndirect": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_SubsurfaceColor": {
+      "Color": {}
+    },
+    "_AlphaClipThreshold": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    }
+  },
+  "Universal Render Pipeline/Particles/Lit": {
+    "_BaseColor": {
+      "Color": {}
+    },
+    "_Cutoff": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Metallic": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Smoothness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_EmissionColor": {
+      "Color": {}
+    },
+    "_DistortionBlend": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Color": {
+      "Color": {}
+    }
+  },
+  "Universal Render Pipeline/Particles/Simple Lit": {
+    "_BaseColor": {
+      "Color": {}
+    },
+    "_Cutoff": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_SpecColor": {
+      "Color": {}
+    },
+    "_Smoothness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_EmissionColor": {
+      "Color": {}
+    },
+    "_DistortionBlend": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Color": {
+      "Color": {}
+    }
+  },
+  "Universal Render Pipeline/Particles/Unlit": {
+    "_BaseColor": {
+      "Color": {}
+    },
+    "_Cutoff": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_EmissionColor": {
+      "Color": {}
+    },
+    "_DistortionBlend": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Color": {
+      "Color": {}
+    }
+  },
+  "Universal Render Pipeline/Simple Lit": {
+    "_BaseColor": {
+      "Color": {}
+    },
+    "_Cutoff": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Smoothness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_SpecColor": {
+      "Color": {}
+    },
+    "_EmissionColor": {
+      "Color": {}
+    },
+    "_Color": {
+      "Color": {}
+    }
+  },
+  "Universal Render Pipeline/Terrain/Lit": {
+    "_HeightTransition": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Metallic0": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Metallic1": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Metallic2": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Metallic3": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Smoothness0": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Smoothness1": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Smoothness2": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Smoothness3": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_BaseColor": {
+      "Color": {}
+    }
+  },
+  "Universal Render Pipeline/Unlit": {
+    "_BaseColor": {
+      "Color": {}
+    },
+    "_Cutoff": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 1.0
+      }
+    },
+    "_Color": {
+      "Color": {}
+    }
+  },
+  "Universal Render Pipeline/VR/SpatialMapping/Wireframe": {
+    "_WireThickness": {
+      "Range": {
+        "Min": 0.0,
+        "Max": 800.0
+      }
+    }
+  },
+  "Unlit/SimpleDots": {
+    "_col": {
+      "Color": {}
+    }
+  },
+  "Unlit/SimpleSpeedTreeDots": {
+    "_col": {
+      "Color": {}
+    }
+  }
+}

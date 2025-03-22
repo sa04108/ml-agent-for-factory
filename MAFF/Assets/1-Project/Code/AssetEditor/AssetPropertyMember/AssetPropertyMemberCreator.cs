@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace Merlin
 {
@@ -13,21 +13,19 @@ namespace Merlin
         private void Start()
         {
             numMemberPreset.gameObject.SetActive(false);
-            //vectorMemberPreset.gameObject.SetActive(false);
-            //matrixMemberPreset.gameObject.SetActive(false);
+            vectorMemberPreset.gameObject.SetActive(false);
+            matrixMemberPreset.gameObject.SetActive(false);
             groupMemberPreset.gameObject.SetActive(false);
             memberGroupPreset.gameObject.SetActive(false);
         }
 
-        public Transform CreateGroupMember(Sprite sprite, string type, string name, Transform parent)
+        public Transform CreateGroupMember(Texture tex, string type, string name, Transform parent)
         {
             var member = Instantiate(groupMemberPreset, parent);
-            member.Initialize(sprite, type, name);
+            member.Initialize(tex, type, name);
             member.gameObject.SetActive(true);
 
             var memberGroup = Instantiate(memberGroupPreset, parent);
-            memberGroup.gameObject.SetActive(true);
-
             member.Button.onClick.AddListener(() => memberGroup.gameObject.SetActive(!memberGroup.gameObject.activeSelf));
 
             return memberGroup;
@@ -69,6 +67,24 @@ namespace Merlin
         public AssetNumberPropertyMember CreateIntMember(Material mat, string name, int value, Transform parent)
         {
             return CreateNumberMember(mat, MaterialPropertyType.Int, name, value, parent);
+        }
+
+        public AssetVectorPropertyMember CreateVectorMember(Material mat, string name, Vector4 value, bool isColor, Transform parent)
+        {
+            var member = Instantiate(vectorMemberPreset, parent);
+            member.Initialize(mat, name, isColor, value);
+            member.gameObject.SetActive(true);
+
+            return member;
+        }
+
+        public AssetMatrixPropertyMember CreateMatrixMember(Material mat, string name, Matrix4x4 value, Transform parent)
+        {
+            var member = Instantiate(matrixMemberPreset, parent);
+            member.Initialize(mat, name, value);
+            member.gameObject.SetActive(true);
+
+            return member;
         }
     }
 }
