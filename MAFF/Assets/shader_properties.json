@@ -1,4 +1,12 @@
 {
+  "Custom/FCP_Gradient": {
+    "_Color1": {
+      "Color": {}
+    },
+    "_Color2": {
+      "Color": {}
+    }
+  },
   "Custom/Test Shader": {
     "_Color": {
       "Color": {}
