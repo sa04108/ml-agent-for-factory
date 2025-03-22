@@ -16,6 +16,7 @@ namespace Merlin
         [SerializeField] private InputFieldsRow[] inputFields;
 
         private Material mat;
+        private string propertyName;
         private Matrix4x4 currentValue;
 
         private void Start()
@@ -32,6 +33,7 @@ namespace Merlin
         public void Initialize(Material mat, string name, Matrix4x4 value)
         {
             this.mat = mat;
+            propertyName = name;
             title.text = $"{name}, [Vector]";
             currentValue = value;
 
@@ -52,7 +54,7 @@ namespace Merlin
                 inputField.SetTextWithoutNotify(fResult.ToString());
 
                 // Unity Matrix4x4는 Column Major를 따르지만 그건 내부에서 알아서 해주는 것이고 외부에서는 알 필요 없다
-                mat.SetMatrix(title.text, currentValue);
+                mat.SetMatrix(propertyName, currentValue);
             }
             else // 빈 값 입력 포함
             {

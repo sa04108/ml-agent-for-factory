@@ -12,6 +12,7 @@ namespace Merlin
         [SerializeField] private TMP_InputField[] inputFields;
 
         private Material mat;
+        private string propertyName;
         private Vector4 currentValue;
         private bool isColor;
         private FlexibleColorPicker colorPicker;
@@ -34,6 +35,7 @@ namespace Merlin
             this.isColor = isColor;
 
             colorIconButton.gameObject.SetActive(isColor);
+            propertyName = name;
             title.text = $"{name}, [{(isColor ? "Color" : "Vector")}]";
             currentValue = value;
 
@@ -78,7 +80,7 @@ namespace Merlin
             currentValue = color;
             colorIconButton.image.color = color;
 
-            mat.SetColor(title.text, color);
+            mat.SetColor(propertyName, color);
         }
 
         private void OnInputValueChanged(TMP_InputField inputField, string value, int idx)

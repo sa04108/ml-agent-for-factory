@@ -11,6 +11,7 @@ namespace Merlin
         [SerializeField] private Slider slider;
 
         private Material mat;
+        private string propertyName;
         private MaterialPropertyType type;
         private float currentValue;
 
@@ -23,11 +24,11 @@ namespace Merlin
 
                 if (type == MaterialPropertyType.Float)
                 {
-                    mat.SetFloat(title.text, value);
+                    mat.SetFloat(propertyName, value);
                 }
                 else if (type == MaterialPropertyType.Int)
                 {
-                    mat.SetInteger(title.text, (int)value);
+                    mat.SetInteger(propertyName, (int)value);
                 }
             }
         }
@@ -42,6 +43,7 @@ namespace Merlin
         {
             this.mat = mat;
             this.type = type;
+            propertyName = name;
             title.text = $"{name}, [{type}]";
             currentValue = value;
             inputField.SetTextWithoutNotify(value.ToString());
@@ -58,6 +60,7 @@ namespace Merlin
         {
             this.mat = mat;
             this.type = type;
+            propertyName = name;
             title.text = $"{name}, [{type}]";
             currentValue = value;
             inputField.SetTextWithoutNotify(value.ToString());

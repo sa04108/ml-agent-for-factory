@@ -54,6 +54,16 @@ namespace Merlin
 
                     var group = memberCreator.CreateGroupMember(mat.mainTexture, "Material", mat.name, memberParent);
 
+                    var textureProps = mat.GetTexturePropertyNames();
+                    foreach (string prop in textureProps)
+                    {
+                        var tex = mat.GetTexture(prop);
+                        if (tex == null)
+                            continue;
+
+                        memberCreator.CreateGroupMember(tex, "Texture", prop, group);
+                    }
+
                     var floatProps = mat.GetPropertyNames(MaterialPropertyType.Float);
                     foreach (string prop in floatProps)
                     {
@@ -101,16 +111,6 @@ namespace Merlin
                     {
                         var value = mat.GetMatrix(prop);
                         memberCreator.CreateMatrixMember(mat, prop, value, group);
-                    }
-
-                    var textureProps = mat.GetTexturePropertyNames();
-                    foreach (string prop in textureProps)
-                    {
-                        var tex = mat.GetTexture(prop);
-                        if (tex == null)
-                            continue;
-
-                        memberCreator.CreateGroupMember(tex, "Texture", renderer.name, group);
                     }
                 }
             }
