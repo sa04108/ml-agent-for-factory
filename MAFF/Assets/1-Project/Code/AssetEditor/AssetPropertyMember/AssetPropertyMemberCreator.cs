@@ -9,6 +9,7 @@ namespace Merlin
         [SerializeField] private AssetMatrixPropertyMember matrixMemberPreset;
         [SerializeField] private AssetGroupPropertyMember groupMemberPreset;
         [SerializeField] private Transform memberGroupPreset;
+        [SerializeField] private FlexibleColorPicker colorPickerPreset;
 
         private void Start()
         {
@@ -17,6 +18,7 @@ namespace Merlin
             matrixMemberPreset.gameObject.SetActive(false);
             groupMemberPreset.gameObject.SetActive(false);
             memberGroupPreset.gameObject.SetActive(false);
+            colorPickerPreset.gameObject.SetActive(false);
         }
 
         public Transform CreateGroupMember(Texture tex, string type, string name, Transform parent)
@@ -72,7 +74,8 @@ namespace Merlin
         public AssetVectorPropertyMember CreateVectorMember(Material mat, string name, Vector4 value, bool isColor, Transform parent)
         {
             var member = Instantiate(vectorMemberPreset, parent);
-            member.Initialize(mat, name, isColor, value);
+            var fcp = Instantiate(colorPickerPreset, parent);
+            member.Initialize(mat, fcp, name, isColor, value);
             member.gameObject.SetActive(true);
 
             return member;

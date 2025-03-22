@@ -7,13 +7,14 @@ namespace Merlin
     public class AssetVectorPropertyMember : MonoBehaviour
     {
         [SerializeField] private TMP_Text title;
-        [SerializeField] private Image colorIcon;
+        [SerializeField] private Button colorIconButton;
         [SerializeField] private TMP_Text[] inputFieldLabels;
         [SerializeField] private TMP_InputField[] inputFields;
 
         private Material mat;
         private Vector4 currentValue;
         private bool isColor;
+        private FlexibleColorPicker colorPicker;
 
         private void Start()
         {
@@ -27,35 +28,57 @@ namespace Merlin
             }
         }
 
-        public void Initialize(Material mat, string name, bool isColor, Vector4 value)
+        public void Initialize(Material mat, FlexibleColorPicker fcp, string name, bool isColor, Vector4 value)
         {
             this.mat = mat;
             this.isColor = isColor;
-            colorIcon.gameObject.SetActive(isColor);
-            colorIcon.color = value;
 
+            colorIconButton.gameObject.SetActive(isColor);
             title.text = $"{name}, [{(isColor ? "Color" : "Vector")}]";
             currentValue = value;
 
-            string[] colorChanels = { "R", "G", "B", "A" };
-            string[] vectorChanels = { "X", "Y", "Z", "W" };
-            for (int i = 0; i < 4; i++)
+            if (isColor)
             {
-                if (isColor)
-                {
-                    inputFieldLabels[i].text = colorChanels[i];
+                SetColorEditor(fcp, value);
 
+                string[] colorChanels = { "R", "G", "B", "A" };
+                for (int i = 0; i < 4; i++)
+                {
                     var color = Color.black;
                     color[i] = 1f;
                     inputFieldLabels[i].color = color;
+
+                    inputFieldLabels[i].text = colorChanels[i];
+                    inputFields[i].text = value[i].ToString();
                 }
-                else
+            }
+            else
+            {
+                string[] vectorChanels = { "X", "Y", "Z", "W" };
+                for (int i = 0; i < 4; i++)
                 {
                     inputFieldLabels[i].text = vectorChanels[i];
+                    inputFields[i].text = value[i].ToString();
                 }
-
-                inputFields[i].text = value[i].ToString();
             }
+        }
+
+        private void SetColorEditor(FlexibleColorPicker fcp, Vector4 value)
+        {
+            colorPicker = fcp;
+            colorPicker.color = value;
+            colorPicker.onColorChange.AddListener(OnColorPick);
+            colorIconButton.onClick.AddListener(ToggleColorPick);
+
+            SetColor(value);
+        }
+
+        private void SetColor(Color color)
+        {
+            currentValue = color;
+            colorIconButton.image.color = color;
+
+            mat.SetColor(title.text, color);
         }
 
         private void OnInputValueChanged(TMP_InputField inputField, string value, int idx)
@@ -67,11 +90,11 @@ namespace Merlin
 
                 if (isColor)
                 {
-                    var color = colorIcon.color;
+                    var color = colorIconButton.image.color;
                     color[idx] = fResult;
-                    colorIcon.color = color;
+                    colorPicker.color = color;
 
-                    mat.SetColor(title.text, color);
+                    SetColor(color);
                 }
                 else
                 {
@@ -82,6 +105,21 @@ namespace Merlin
             {
                 inputField.SetTextWithoutNotify(currentValue[idx].ToString());
             }
+        }
+
+        private void OnColorPick(Color color)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                inputFields[i].SetTextWithoutNotify(color[i].ToString());
+            }
+
+            SetColor(color);
+        }
+
+        private void ToggleColorPick()
+        {
+            colorPicker.gameObject.SetActive(!colorPicker.gameObject.activeSelf);
         }
     }
 }
