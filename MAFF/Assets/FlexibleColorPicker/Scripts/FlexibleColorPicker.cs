@@ -17,13 +17,11 @@
 
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-#if TMPro
-using TMPro;
-#endif
 
 
 /// <summary>
@@ -54,19 +52,11 @@ public class FlexibleColorPicker : MonoBehaviour {
 
     [Tooltip("Connection to the FCP's hexadecimal input field.")]
     [SerializeField]
-#if TMPro
-    private TMPro.TMP_InputField hexInput;
-#else
-    private InputField hexInput;
-#endif
+    private TMP_InputField hexInput;
 
     [Tooltip("Connection to the FCP's mode dropdown menu.")]
     [SerializeField]
-#if TMPro
     private TMP_Dropdown modeDropdown;
-#else
-    private Dropdown modeDropdown;
-#endif
 
     private Canvas canvas;
 
